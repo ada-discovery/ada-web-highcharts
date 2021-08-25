@@ -6,7 +6,7 @@ organization := "org.adada"
 
 name := "ada-web-highcharts"
 
-version := "0.9.0-SNAPSHOT"
+version := "0.9.0"
 
 scalaVersion := "2.11.12"
 
@@ -22,7 +22,7 @@ routesImport ++= Seq(
   "org.ada.web.controllers.QueryStringBinders._"
 )
 
-val adaVersion = "0.9.0-SNAPSHOT"
+val adaVersion = "0.9.0"
 
 libraryDependencies ++= Seq(
   "org.adada" %% "ada-web" % adaVersion,
