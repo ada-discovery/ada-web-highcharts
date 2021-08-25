@@ -8,6 +8,8 @@ name := "ada-web-highcharts"
 
 version := "0.9.0"
 
+isSnapshot := false
+
 scalaVersion := "2.11.12"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala, SbtWeb)
@@ -66,3 +68,26 @@ pipelineStages in Assets := Seq(uglify, digest, gzip)
 includeFilter in digest := (includeFilter in digest).value && new SimpleFileFilter(f => f.getPath.contains("public/"))
 
 excludeFilter in gzip := (excludeFilter in gzip).value || new SimpleFileFilter(file => new File(file.getAbsolutePath + ".gz").exists)
+
+// POM settings for Sonatype
+homepage := Some(url("https://ada-discovery.github.io"))
+
+publishMavenStyle := true
+
+scmInfo := Some(ScmInfo(url("https://github.com/ada-discovery/ada-web-highcharts"), "scm:git@github.com:ada-discovery/ada-web-highcharts.git"))
+
+developers := List(
+  Developer("bnd", "Peter Banda", "peter.banda@protonmail.com", url("https://peterbanda.net"))
+)
+
+licenses ++= Seq(
+  "Creative Commons Attribution-NonCommercial 3.0" -> url("http://creativecommons.org/licenses/by-nc/3.0"),
+  "Highcharts" -> url("https://shop.highsoft.com")
+)
+
+publishTo  := Some(
+  if (isSnapshot.value)
+    Opts.resolver.sonatypeSnapshots
+  else
+    Opts.resolver.sonatypeStaging
+)
